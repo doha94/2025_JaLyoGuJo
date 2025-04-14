@@ -535,3 +535,328 @@ c               # 출력 -> 0.6
 # 무조건 순서를 지킴
 
 
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 2월 11일
+
+
+
+
+
+# Class(클래스)
+
+
+# 객체지향 프로르래밍 언어.
+# 파이썬에서는 대부분을 객체로 처리.( 속성 + 메서드)
+# 클래스는 객체 생성을 위한 설계도
+
+
+
+# 정의방법
+class 클래스명:
+    # 속성과 매서드 정의;
+    name = "홍길동"
+
+
+# 예시
+class Person:
+    name = "HongGilDong"
+    def intro(self):
+        print(f"저는 {self.name}입니다.")
+        
+# 객체 생성하기
+p = Person()            # p안에 Person() 클래스 넣기
+p.intro()               # 클래스 Person() 작동시키기
+
+#-------------------------------------------------------
+
+
+# 정의 방법
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+        # 객체를 문자열로 표현하여 반환
+        def __str__(self):
+            return f"{self.name}({self.age})"
+
+    def intro(self):
+        print(f"안녕하세요, 저는 {self.age}세 {self.name}입니다.")
+                
+# 객체 생성하기
+p = Person("홍길동", 20)
+p.intro()
+
+
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+        # 객체를 문자열로 표현하여 반환
+        def __str__(self):
+            return f"{self.name}({self.age})"
+
+    def intro(self):
+        print(f"안녕하세요, 저는 {self.age}세 {self.name}입니다.")
+                
+
+# 객체 생성하기
+p = Person("홍길동", 20)
+p.intro()
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+# 자료구조(Data Structure): 일련의 동일한 타입의 데이터를 정돈하여 저장한 구성체
+# 데이터를 정돈하는 목적: 데이터에 대해 접근, 탐색, 삽입, 삭제 등의 연산을 효율적으로 수행하기 위해
+# 자료구조를 설계할 떄는 데이터와 데이터에 관련된 연산을 함께 고려
+
+
+# 자료구조의 효율성은 자료궂에 대해 수행되는 연산의 수행시간으로 측정
+# 자료구조에 대한 연산 수행 시간은 알고리즘의 효율성을 계산하는 방식과 동일
+
+
+# 알고리즘의 효율정:
+    # 시간 복잡도(Time Complexity): 수행 시간
+    # 공간 복잡도(Space Complexity): 알고리즘이 수행되는 동안 사용되는 메모리의 크기
+
+
+# 시간 복잡도: 알고리즘(연산)이 실행되는 동안 사용된 기본적인 여산 횟수를 입력 크기의 함수로 나타냄
+
+# 기본 연산(Elementary Operation)
+# 데이터 간 크기 비교
+# 데이터 읽기
+# 데이터 갱신
+# 단순한 계산 등과 같은 단순한 연산
+
+
+# 일반적으로 알고리즘의 수행 시간은 최악 경우로 표현
+
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 4월 8일
+
+
+# 리스트
+# 일반적인 리스트(List)는 일련의 동일한 타입의 항목(item)들이 나열된 것
+
+
+# 일반적인 리스트의 구현
+# 파이썬 리스트
+# 단순 연결 리스트
+# 이중 연결 리스트
+# 원형 연결 리스트
+
+
+
+#-------------------------------------------------------------------
+
+
+# 단순 연결 리스트
+# 동적 메모리 할당을 이용해 리스트를 구현하는 가장 간단한 형태의 자료구조
+# 동적 메모리 할당을 받아 노드(Node)를 저장하고, 노드는 레퍼런스를 이용하여 다음 노드를 가리키어 노드들을 한 줄로 연결
+
+# 연결 리스트에서는 삽입이나 삭제 시 노드들의 이동이 필요 없음
+
+# 연결 리스트에서는 삽입이나 삭제 시 노드들의 이동이 필요 없음
+# 연결리스트에서는 탐색하려면 항상 첫 노드부터 원하는 노드를 찾을 때까지 차례로 방문: 순차 탐색(Sequential Search)
+
+
+
+
+
+#=======================================
+# 단순 연결 리스트 (Singly Linked list)
+#=======================================
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+    def __str__(self):
+        return f"[{self.data}]"
+#=======================================
+class SList:
+    def __init__(self):
+        self.head = None            # SList의 첫 노드를 가리킨다.(초기 값은 빈 리스트이므로 None)
+        self.count = 0              # SList에 연결된 노드의 개수(를 항상 유지한다.)
+        
+        
+        
+        
+    #---------------------------
+    def __len__(self):
+        return self.count
+    
+    
+    
+    
+    #---------------------------
+    # 새로운 노드를 만들거나 노드에 값을 추가하기
+    def insertFront(self, newNode):
+        if self.head is None:       
+            self.head = newNode
+            self.count = 1
+        else:
+            newNode.next = self.head
+            self.head = newNode
+            self.count += 1
+                
+                
+                
+    #---------------------------
+    # append -> 기존의 리스트 맨 뒤에 새 노드를 연결함.
+    def append(self, newNode):
+        if self.head is None:       # Slist가 빈 리스트인 경우
+            self.head = newNode     # 추가하려는 새 노드(newNode)가 첫 노드가 된다.
+            self.count = 1
+        else:       # 1개 이상의 노드가 있는 경우, (마지막 노드를 찾아서 그 뒤에 newNode를 연결한다.)
+            current = self.head     # 리스트의 첫 노드(self.head)부터 순서대로 확인하며 마지막 노드를 찾는다.
+            while current.next is not None:     # 다음 노드가 마지막 노드가 아니라면(현재 가리키고 있는 노드의 다음이 값이 있다면)
+                current = current.next          # current는 다음 노드를 가리키도록 설정.
+                
+            current.next = newNode
+            self.count += 1
+    
+    
+    
+        
+    #---------------------------------
+    # 리스트의 맨 끝에 새로운 요소를 추가하기
+    def appendValue(self, value):
+        self.append(Node(value))
+    
+    
+    
+    
+    #----------------------------     
+    # 리스트 보여주기       
+    def showList(self):
+        print("Head->", end="")
+        current = self.head
+        while current is not None:
+            print(f"{current}-", end="")
+            current = current.next
+        
+        print(f"-> None")
+        print(f"({self.count}개 노드가 있습니다.)")
+
+    
+    
+
+
+    #---------------------------------
+    # 리스트의 첫 노드를 삭제하며 반환한다. (빈 리스트이면 none 반환)
+    def unshift(self):
+        if self.head is None:
+            return None
+        else:
+            header = self.head
+            self.head = self.head.next  # 첫 노드 제거
+            header.next = None
+            self.count -= 1
+            return header
+        
+        
+        
+        
+    #---------------------------------
+    # 리스트를 역순으로 출력하기.
+    def reverse(self):
+        revList = SList()   # 역순으로 재구성하는 데 활용할 빈 리스트 생성
+        
+        # 기존 리스트의 첫 노드를 차례대로 제거하며 revList에 insertFront() 처리한다.
+        while self.head is not None:
+            h = self.unshift()  # 기존 리스트의 첫 노드를 제거한다. (h에 저장.)
+            revList.insertFront(h)  # 새 리스트(recList)의 insertFront()로 제거한 노드를 추가한다.
+        
+        self.head = revList.head
+        self.count = revList.count
+        
+    
+    
+    
+    #----------------------------------
+    def reverse2(self):
+        revHead = None
+        while self.head is not None:
+            next = self.head.next
+            self.head.next = revHead
+            revHead = self.head
+            self.head = next
+            
+        self.head = revHead
+        
+        
+        
+    #---------------------------------
+    # 특정 값을 가진 노드를 연결 리스트에서 제거한다.
+    def remove(self, value):
+        targetNode = self.find(value)# 아래에 만들었던 find를 이용하여 리스트들의 값을 미리 확인 하고, targetNode에 넣어 둠
+        if targetNode is None:  # 만약 targetNode에 값이 들어가지 않는다면 이는 리스트 안에 값이 없다는것을 가리킴. 즉 더 이상 확인할 필요가 없다는 것
+            return None         # 고로 None값을 반환하여 끝냄
+        else:
+            previous = None
+            current = self.head
+            while current is not targetNode:
+                previous = current
+                current = current.next
+            
+                # targetNode가 첫 번째 노드일 때 처리
+            if previous is None:
+                self.head = current.next  # head를 다음 노드로 설정
+            else:
+                previous.next = current.next  # current 노드를 제거
+                # 연결 끊었으므로 targetNode를 리턴할 수 있으면 리턴
+            return targetNode
+        
+        
+        
+    #---------------------------------
+    # 특정값이 리스트에 포함되어 있는지 결과를 알려주기
+    # 반환값: 없을 경우 None, 있으면 해당 노드 반환
+    def find(self, value):
+        current = self.head
+        while current is not None:
+            if value == current.data:
+                return current
+            else:
+                current = current.next
+        # vlaue를 찾지 못하면 while 종료
+        return None
+
+
+
+
+#===========================================================================================================================================================
+# 출력하기!
+
+print("0-------------------------------")
+lst = SList()
+lst2 = SList()
+
+lst.insertFront(Node(100))
+lst.insertFront(Node(200))
+lst.insertFront(Node(500))
+lst.insertFront(Node(1000))
+lst.remove(200)
+lst.showList()
+
+
+print("1-------------------------------")
+lst.insertFront(Node(200))
+lst.showList()
+
+
+print("2-------------------------------")
+lst2 = lst
+lst2.reverse2()
+
+lst2.showList()
