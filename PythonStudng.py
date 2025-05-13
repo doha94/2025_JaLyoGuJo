@@ -87,11 +87,11 @@ print("안녕하세요, %s씨."%(name))
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 타입 확인하기
-type(n)
+# type(N)
 
 # 타입 변환하기
-int(n)  # 변수의 속성을 int형으로 바꿈(하지만 값 자체는 바뀌지 않음)
-n = int(n)  # 변수의 값 자체를 다시 바꾸어서 입력시킴(값 자체가 int로 바뀜)
+# int(N)  # 변수의 속성을 int형으로 바꿈(하지만 값 자체는 바뀌지 않음)
+# n = int(N)  # 변수의 값 자체를 다시 바꾸어서 입력시킴(값 자체가 int로 바뀜)
 
 #예시
 temp = input("체온:")   # 체온:37.5
@@ -290,15 +290,6 @@ a = "Korea"
 a[0]        # K
 a[1]        # o
 # 인덱스로 문자열을 하나 때어 오든 모든 문자열을 쓰든 모두 문자형임.(배열로 표기되는게 아니라는 것)
-type(a[1])  # str(O), list(X)
-print(len(st))  # 문자열의 길이 반환
-'I' in 'DIT'    # 문자열 포함 여부 확인(in, not in 사용 가능)
-
-a = "Korea/Japan/China"
-"Japan" in a        # True 출력
-"Mexico" in a       # False 출력
-"Mexico" not in a   # True 출력
-
 
 st = "  Hello, Python  "
 st.upper()          #   HELLO, PYTHON   --> 모두 대문자로 변환한 결과 반환(upper)
@@ -309,6 +300,16 @@ st.replace("Hello,", "I Love")      # I Love python     --> 원하는 문자 변
 st = st.lower().replace("love", "like")  # i like python
 
 st = st.title()          # I Like Python    --> 모든 단어의 앞자리가 대문자로 바뀜(title)
+
+type(a[1])  # str(O), list(X)
+print(len(st))  # 문자열의 길이 반환
+'I' in 'DIT'    # 문자열 포함 여부 확인(in, not in 사용 가능)
+
+a = "Korea/Japan/China"
+"Japan" in a        # True 출력
+"Mexico" in a       # False 출력
+"Mexico" not in a   # True 출력
+
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -969,3 +970,118 @@ print("4-------------------------------")
 lst.append(Node(5000))
 lst.insertFront(Node(4000))
 lst.showList()
+
+
+
+
+
+
+
+#===========================================================================================================================================================
+# 5월 13일
+"""
+    이중 연결 리스트(double linked list)
+"""
+
+
+#=======================================================
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.next = None
+        self.prev = None
+    
+    def __str__(self):
+        return f"[{self.data}]"
+    
+    
+#========================================================
+class DList:                    # 임의의 리스트에 연결부 만들어주기?
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+        
+        
+    #---------------------------------------------------
+    # 리스트의 맨 뒤에 value 값을 가진 새 노드를 연결한다.
+    def append(self, value):        # 값을 뒤에다 붙이기
+        # 새로 추가할 노드 생성
+        newNode = Node(value)
+        # 빈 리스트인 경우를 먼저 확인하고 처리한다.
+        if self.count == 0:
+            self.head = newNode
+            self.tail = newNode
+        else:           # 빈 리스트가 아닌 경우에는 리스트의 tail이 가리키는 노드 뒤에 새 노드를 연결한다.
+            self.tail.next = newNode
+            newNode.prev = self.tail
+            self.tail = newNode
+        # 리스트의 노드 개수 증가 반영
+        self.count += 1
+
+
+    #---------------------------------------------------
+    def insertFront(self, value):    # 값을 앞에다 붙이기
+        newNode = Node(value)
+        if self.count == 0:
+            self.tail = newNode
+            self.head = newNode
+        else:
+            self.head.prev = newNode
+            newNode.next = self.head
+            self.head = newNode
+        self.count += 1
+        
+        
+    #---------------------------------------------------
+    # 리스트에서 value 값을 가진 첫 노드를 찾아서 반환한다.
+    # 없으면 none 값을 반환
+    def find(self, value):
+        current = self.head
+        while current:          # == while current is not none
+            if value == current.data:
+                return current
+            else:
+                current = current.next
+        # vlaue를 찾지 못하면 while 종료
+        return None        
+    
+    
+    #---------------------------------------------------
+    def showList(self):             # 리스트 보여주기
+        print("head->", end="")
+        # head부터 마지막 노드까지 차례대로 노드를 출력한다.
+        current = self.head
+        while current:      # == while current is not none
+            print(current, end="-")
+            current = current.next
+        # 리스트의 노드 개수를 출력하면서 리스트 출력 마무리.
+        print(f"({self.count} nodes)")
+        
+        
+    #---------------------------------------------------
+    # 리스트의 존재하는 target 앞에 value값을 가진 새 노드를 생성하여 삽입한다.                                                     속보! 이해안됨 지피티한테 물어보기
+    def insertBefore(self, target, value):
+        if target:
+            return None
+        if target is self.head:
+            self.insertFront(value)
+        else:
+            newNode = Node(value)
+            newNode.next = target
+            newNode.prev = target.prev
+            target.prev.next = newNode
+            target.prev = newNode
+        self.count += 1
+        
+    #---------------------------------------------------
+    # 리스트에 존재하는 target 뒤에 value값을 가진 새 노드를 생성하여 삽입한다.
+    def insertAfter(self, targetNode, value):
+        # 다음수업까지 만들어오기
+#========================================================
+dlist = DList()
+dlist.insertFront(100)
+dlist.insertFront(200)
+dlist.insertFront(300)
+dlist.showList()
+dlist.insertBefore(dl)
